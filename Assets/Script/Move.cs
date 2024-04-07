@@ -4,52 +4,22 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
-    [SerializeField] float _speedMove;
-    [SerializeField] float _speedRotate;
-    Rigidbody rb;
+    private [SerializeField] float _speed;
+    private [SerializeField] float _rotationSpeed;
+    
+    private Rigidbody _rb;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
     {
-        if (Input.GetKey(KeyCode.W))
-            Forward();
+        float sideForce = Input.GetAxis("Horizontal") * _rotationSpeed;
+        float forwardForce = Input.GetAxis("Vertical") * _speed;
 
-        if (Input.GetKey(KeyCode.S))
-            Back();
-
-        if (Input.GetKey(KeyCode.A))
-            Left();
-
-        if (Input.GetKey(KeyCode.D))
-            Right();
-    }
-
-    void Forward()
-    {
-        rb.AddRelativeForce(Vector3.forward * _speedMove, ForceMode.Acceleration);
-    }
-
-    void Back()
-    {
-        rb.AddRelativeForce(Vector3.back * _speedMove, ForceMode.Acceleration);
-    }
-
-    void Left()
-    {
-        //rb.AddRelativeForce(Vector3.left * _speedMove);
-        gameObject.transform.Rotate(Vector3.down * _speedRotate);
-
-    }
-
-    void Right()
-    {
-        //rb.AddRelativeForce(Vector3.right * _speedMove);
-        gameObject.transform.Rotate(Vector3.up * _speedRotate);
-
+        _rb.AddRelativeForce(0.0f, 0.0f, forwardForce);
+        _rb.AddRelativeTorque(0.0f, sideForce, 0.0f);
     }
 }
