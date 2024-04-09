@@ -8,14 +8,15 @@ public class Loot : MonoBehaviour
     [SerializeField] private int _score;
     [SerializeField] private float _distanceShow;
     [SerializeField] private float _distance;
-    [SerializeField] GameObject _player;
-    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] private Transform _playerTransform;
+    [SerializeField] private MeshRenderer meshRenderer;
+    
     // Start is called before the first frame update
    
 
     private void Update()
     {
-        _distance = Vector3.Distance(gameObject.transform.position, _player.transform.position);
+        _distance = Vector3.Distance(transform.position, _playerTransform.position);
 
         if (_distance > _distanceShow)
             meshRenderer.enabled = false;
@@ -30,8 +31,8 @@ public class Loot : MonoBehaviour
             Debug.Log(player + "loot");
             _scoreText.text = Score();
             gameObject.SetActive(false);
+            //destroy();
         }
-
     }
 
     string Score()

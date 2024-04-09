@@ -6,8 +6,9 @@ public class Boomb : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel;
     [SerializeField] private float _distanceShow;
     [SerializeField] private float _distance;
-    [SerializeField] GameObject _player;
-    [SerializeField] MeshRenderer meshRenderer;
+    [SerializeField] private Transform _playerTransform;
+    [SerializeField] private MeshRenderer meshRenderer;
+    
     // Start is called before the first frame update
     private void Awake()
     {
@@ -17,7 +18,7 @@ public class Boomb : MonoBehaviour
 
     private void Update()
     {
-        _distance = Vector3.Distance(gameObject.transform.position, _player.transform.position);
+        _distance = Vector3.Distance(transform.position, _playerTransform.position);
 
         if (_distance > _distanceShow)
             meshRenderer.enabled = false;
@@ -28,11 +29,14 @@ public class Boomb : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Move player))
+        if(other.TryGetComponent(out Move _playerMoved))
         {
-            player.activeInput = false;
-            _scoreText.text = "0";
-            _gameOverPanel.SetActive(true);
-        }
+           _playerMoved._activeInput = false;
+           _scoreText.text = "0";
+           _gameOverPanel.SetActive(true);
+            
+            
+       }
+        
     }
 }

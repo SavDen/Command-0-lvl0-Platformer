@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class Move : MonoBehaviour
 {
+    public bool _activeInput = true;
+    
     [SerializeField] private float _speed;
     [SerializeField] private float _rotationSpeed;
-    [SerializeField] public bool activeInput = true;
-    [SerializeField] public float distance;
+    [SerializeField] private float distance;
     
     private  Rigidbody _rb;
     private void Awake()
@@ -16,7 +17,7 @@ public class Move : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (activeInput)
+        if (_activeInput)
         {
             float sideForce = Input.GetAxis("Horizontal") * _rotationSpeed;
             float forwardForce = Input.GetAxis("Vertical") * _speed;
@@ -24,5 +25,10 @@ public class Move : MonoBehaviour
             _rb.AddRelativeForce(0.0f, 0.0f, forwardForce, ForceMode.VelocityChange);
             _rb.AddRelativeTorque(0.0f, sideForce, 0.0f, ForceMode.VelocityChange);
         }
+    }
+
+    public void Jump()
+    {
+        //code
     }
 }
