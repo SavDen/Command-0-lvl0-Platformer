@@ -8,30 +8,81 @@ public class Loot : MonoBehaviour
     [SerializeField] private int _score;
     [SerializeField] private float _distanceShow;
     [SerializeField] private float _distance;
+<<<<<<< HEAD
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private MeshRenderer meshRenderer;
     
+=======
+    [SerializeField] private Transform _player;
+    [SerializeField] private MeshRenderer _meshRenderer;
+    [SerializeField] private GameObject _actUI;
+>>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
     // Start is called before the first frame update
    
 
     private void Update()
     {
+<<<<<<< HEAD
         _distance = Vector3.Distance(transform.position, _playerTransform.position);
+=======
+        _distance = Vector3.Distance(transform.position, _player.position);
+>>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
 
         if (_distance > _distanceShow)
-            meshRenderer.enabled = false;
+        {
+            _meshRenderer.enabled = false;
+            //_actUI.SetActive(false);
+        }
         else
-            meshRenderer.enabled = true;
+        {
+            _meshRenderer.enabled = true;
+            //_actUI.SetActive(true);
 
+            if (Input.GetKey(KeyCode.Q))
+            {
+
+                Debug.Log("loot");
+                _scoreText.text = Score();
+                _actUI.SetActive(false);
+                gameObject.SetActive(false);
+                //можно выделить в отдельный метод
+
+            }
+        }
     }
+
+    //По сути не нужен, можно удалить. Так же нет необходимости использовать Rigidbody 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.TryGetComponent(out Move player))
+        if (other.TryGetComponent(out Move player))
         {
+<<<<<<< HEAD
             Debug.Log(player + "loot");
             _scoreText.text = Score();
             gameObject.SetActive(false);
             //destroy();
+=======
+            Debug.Log("onTrigger");
+            _actUI.SetActive(true);
+
+            if (Input.GetKey(KeyCode.Q))
+            {
+
+                Debug.Log(player + "loot");
+                _scoreText.text = Score();
+                _actUI.SetActive(false);
+                gameObject.SetActive(false);
+
+            }
+>>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out Move player))
+        {
+            _actUI.SetActive(false);
         }
     }
 
