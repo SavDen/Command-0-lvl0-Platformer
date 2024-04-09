@@ -14,14 +14,12 @@ public class Boomb : MonoBehaviour
     [SerializeField] private DactivationBomb _dactivationBomb;
 
     [SerializeField] private float _distance;
-<<<<<<< HEAD
+
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private MeshRenderer meshRenderer;
     
-=======
     [SerializeField] private float _distanceShow;
     [SerializeField] private int _bonus;
->>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
     // Start is called before the first frame update
     private void Awake()
     {
@@ -31,11 +29,10 @@ public class Boomb : MonoBehaviour
 
     private void Update()
     {
-<<<<<<< HEAD
+
         _distance = Vector3.Distance(transform.position, _playerTransform.position);
-=======
+
         _distance = Vector3.Distance(transform.position, _player.position);
->>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
 
         if (_distance > _distanceShow)
         {
@@ -48,7 +45,7 @@ public class Boomb : MonoBehaviour
             if(Input.GetKey(KeyCode.E))
             {
                 _dactivationBomb.enabled = true;
-                _playerMove.activeInput = false;
+                _playerMove._activeInput = false;
                 _numpad.SetActive(true);
             }
 
@@ -61,25 +58,18 @@ public class Boomb : MonoBehaviour
     {
         if(other.TryGetComponent(out Move _playerMoved))
         {
-<<<<<<< HEAD
            _playerMoved._activeInput = false;
            _scoreText.text = "0";
            _gameOverPanel.SetActive(true);
-            
+           Dead();
             
        }
         
     }
-}
-=======
-            Dead();
-        }
-    }
-
     public void Dead()
     {
         _scoreText.text = "0";
-        _playerMove.activeInput = false;
+        _playerMove._activeInput = false;
         _actUI.SetActive(false);
         _gameOverPanel.SetActive(true);
     }
@@ -87,7 +77,7 @@ public class Boomb : MonoBehaviour
     public void DactivationBoomb()
     {
         _scoreText.text = Bonus();
-        _playerMove.activeInput = true;
+        _playerMove._activeInput = true;
         _actUI.SetActive(false);
         _numpad.SetActive(false);
         gameObject.SetActive(false);
@@ -100,8 +90,6 @@ public class Boomb : MonoBehaviour
         return _bonus.ToString();
 
     }
-
-
-
 }
->>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
+         
+

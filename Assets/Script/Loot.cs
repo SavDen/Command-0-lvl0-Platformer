@@ -8,25 +8,24 @@ public class Loot : MonoBehaviour
     [SerializeField] private int _score;
     [SerializeField] private float _distanceShow;
     [SerializeField] private float _distance;
-<<<<<<< HEAD
     [SerializeField] private Transform _playerTransform;
     [SerializeField] private MeshRenderer meshRenderer;
     
-=======
+
     [SerializeField] private Transform _player;
     [SerializeField] private MeshRenderer _meshRenderer;
     [SerializeField] private GameObject _actUI;
->>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
+
     // Start is called before the first frame update
    
 
     private void Update()
     {
-<<<<<<< HEAD
+
         _distance = Vector3.Distance(transform.position, _playerTransform.position);
-=======
+
         _distance = Vector3.Distance(transform.position, _player.position);
->>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
+
 
         if (_distance > _distanceShow)
         {
@@ -56,12 +55,12 @@ public class Loot : MonoBehaviour
     {
         if (other.TryGetComponent(out Move player))
         {
-<<<<<<< HEAD
+
             Debug.Log(player + "loot");
             _scoreText.text = Score();
             gameObject.SetActive(false);
             //destroy();
-=======
+
             Debug.Log("onTrigger");
             _actUI.SetActive(true);
 
@@ -74,7 +73,7 @@ public class Loot : MonoBehaviour
                 gameObject.SetActive(false);
 
             }
->>>>>>> c38315eb8232e43cff011b1b538c44af2945ae33
+
         }
     }
 
